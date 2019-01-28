@@ -18,9 +18,9 @@ public class Top {
 	 * @see words.invertedindex.InvertedIndex
 	 * 
 	 */
-	final static public List<HashSet<Word>> getTopTen(Map<Integer, HashSet<Word>> frequencyTable, int cursor) {
+	final static public List<String> getTopTen(Map<Integer, HashSet<Word>> frequencyTable, int cursor) {
 
-		List<HashSet<Word>> res = new ArrayList<>();
+		List<String> res = new ArrayList<>();
 
 		int counter = 0;
 
@@ -33,9 +33,7 @@ public class Top {
 			HashSet<Word> words = frequencyTable.get(i);
 			if (words.size() > 0) {
 				counter++;
-				System.out.println("" + (i + 1) + " " + words);
-
-				res.add(frequencyTable.get(i));
+				res.add("" + (i + 1) + " " + words);
 			}
 		}
 		return res;
