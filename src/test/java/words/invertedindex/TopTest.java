@@ -16,13 +16,25 @@ import org.junit.Test;
 
 public class TopTest {
 
-	List<Word> expected;
-
-	List<Word> expectedBase;
+	List<Word> expectedTenWords;
 
 	List<Word> extraWords;
 
-	List<Word> wordsUnderTest = new ArrayList<>();
+	List<Word> moreThanTenWordswords = new ArrayList<>();
+
+	@Test
+	public void shouldReturnTheTenMostFrequentWordsWhenMoreThanTenWordsAreParsed() {
+
+		Words<Word> frequencyTable = new InvertedIndex<Word>().getWords(moreThanTenWordswords);
+
+		Map<Integer, HashSet<Word>> firstTen = Top.getTopTen(frequencyTable, 10);
+
+		Set<Entry<Integer, HashSet<Word>>> entries = firstTen.entrySet();
+
+		for (Entry<Integer, HashSet<Word>> found : entries) {
+			assertTrue(expectedTenWords.containsAll(found.getValue()));
+		}
+	}
 
 	@Before
 	public void setUp() {
@@ -37,34 +49,28 @@ public class TopTest {
 		final Word i = new Word("i");
 		final Word m = new Word("m");
 
-		expected = Arrays.asList(a, b, g, c, d, e, f, h, i, m);
+		/*
+		 * Only ten words are expected to be found when more than ten words are
+		 * submitted to the program
+		 **/
+		expectedTenWords = Arrays.asList(a, b, g, c, d, e, f, h, i, m);
 
-		expectedBase = Arrays.asList(a, a, a, b, b, b, c, c, d, d, e, e, f, f, g, g, g, h, h, i, i, m, m);
+		/*
+		 * These ten words are present 3 times
+		 **/
+		for (int j = 0; j < 3; j++) {
+			moreThanTenWordswords.addAll(expectedTenWords);
 
-		extraWords = Arrays.asList(new Word("zzzz"), new Word("uuuuu"), new Word("vvvvv"), new Word("tttttt"),
-				new Word("xxxxxx"), new Word("yyyyy"));
-
-		wordsUnderTest = new ArrayList<>();
-
-		wordsUnderTest.addAll(expectedBase);
-
-		wordsUnderTest.addAll(extraWords);
-
-		Collections.shuffle(wordsUnderTest);
-	}
-
-	@Test
-	public void shouldReturnTheTenMostFrequentWords() {
-
-		Words<Word> frequencyTable = new InvertedIndex<Word>().getWords(wordsUnderTest);
-
-		Map<Integer, HashSet<Word>> firstTen = Top.getTopTen(frequencyTable, 10);
-
-		Set<Entry<Integer, HashSet<Word>>> entries = firstTen.entrySet();
-
-		for (Entry<Integer, HashSet<Word>> element : entries) {
-			assertTrue(expected.containsAll(element.getValue()));
 		}
+		/*
+		 * These words are present only one time
+		 **/
+		extraWords = Arrays.asList(new Word("z"), new Word("u"), new Word("v"), new Word("t"), new Word("x"),
+				new Word("y"));
+
+		moreThanTenWordswords.addAll(extraWords);
+
+		Collections.shuffle(moreThanTenWordswords);
 	}
 
 }
