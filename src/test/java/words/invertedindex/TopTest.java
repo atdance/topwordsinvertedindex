@@ -46,7 +46,7 @@ public class TopTest {
 
 		InvertedIndex<Word> index = new InvertedIndex<>();
 
-		Map<Integer, HashSet<Word>> frequencyTable = index.getWords(wordsUnderTest);
+		Words<Word> frequencyTable = index.getWords(wordsUnderTest);
 
 		Map<Integer, HashSet<Word>> firstTen = Top.getTopTen(frequencyTable, 10);
 

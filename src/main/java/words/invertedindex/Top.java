@@ -33,7 +33,7 @@ public class Top {
 			HashSet<V> words = frequencyTable.get(i);
 			if (words.size() > 0) {
 				counter++;
-				res.put(new Integer(i), words);
+				res.put(Integer.valueOf(i), words);
 			}
 		}
 
