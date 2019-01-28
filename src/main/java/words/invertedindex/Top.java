@@ -1,9 +1,9 @@
 package words.invertedindex;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Utility that retrieves top elements of a list of text words.
@@ -18,9 +18,9 @@ public class Top {
 	 * @see words.invertedindex.InvertedIndex
 	 * 
 	 */
-	final static public List<String> getTopTen(Map<Integer, HashSet<Word>> frequencyTable, int cursor) {
+	final static public Map<Integer, HashSet<Word>> getTopTen(Map<Integer, HashSet<Word>> frequencyTable, int cursor) {
 
-		List<String> res = new ArrayList<>();
+		Map<Integer, HashSet<Word>> res = new HashMap<>();
 
 		int counter = 0;
 
@@ -33,10 +33,10 @@ public class Top {
 			HashSet<Word> words = frequencyTable.get(i);
 			if (words.size() > 0) {
 				counter++;
-				res.add("" + (i + 1) + " " + words);
+				res.put(new Integer(i), words);
 			}
 		}
-		return res;
-	}
 
+		return new TreeMap<>(res).descendingMap();
+	}
 }
