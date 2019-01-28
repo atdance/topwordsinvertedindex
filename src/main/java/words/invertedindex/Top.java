@@ -37,9 +37,7 @@ public class Top {
 			}
 		}
 
-		Map<Integer, HashSet<V>> all = res.getAll();
-
-		TreeMap<Integer, HashSet<V>> treeMap = new TreeMap<>(all);
+		TreeMap<Integer, HashSet<V>> treeMap = new TreeMap<>(res.getAll());
 
 		return treeMap.descendingMap();
 	}
