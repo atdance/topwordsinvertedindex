@@ -39,7 +39,9 @@ public class TopTest {
 		List<Word> wordsUnderTest = new ArrayList<>();
 
 		wordsUnderTest.addAll(expectedBase);
+
 		wordsUnderTest.addAll(extraWords);
+
 		Collections.shuffle(wordsUnderTest);
 
 		InvertedIndex<Word> index = new InvertedIndex<>();
@@ -51,12 +53,7 @@ public class TopTest {
 		Set<Entry<Integer, HashSet<Word>>> entries = firstTen.entrySet();
 
 		for (Entry<Integer, HashSet<Word>> element : entries) {
-
-			HashSet<Word> hashset = element.getValue();
-
-			Set<Word> setExpected = new HashSet<>(expected);
-
-			assertTrue(setExpected.containsAll(hashset));
+			assertTrue(expected.containsAll(element.getValue()));
 		}
 	}
 
