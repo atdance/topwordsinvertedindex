@@ -1,7 +1,6 @@
 package words.invertedindex;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -44,29 +43,7 @@ public class WordsApplication {
 
 		int cursor = index.getMaxIndexUsed();
 
-		top(frequencyTable, cursor);
-
-		System.out.println(getSize(frequencyTable));
-
-	}
-
-	final static public void top(Map<Integer, HashSet<Word>> frequencyTable, int cursor) {
-
-		int counter = 0;
-
-		final int SIZE = cursor + 1;
-
-		for (int i = SIZE; i > 0; i--) {
-			if (counter == 10) {
-				break;
-			}
-
-			if (frequencyTable.get(i).size() > 0) {
-				counter++;
-				System.out.println("" + (i + 1) + " " + frequencyTable.get(i));
-			}
-		}
-
+		Top.getTopTen(frequencyTable, cursor);
 	}
 
 	/**
@@ -87,25 +64,6 @@ public class WordsApplication {
 		});
 
 		return size.intValue();
-	}
-
-	final static public void topNew(Map<Integer, HashSet<Object>> frequencyTable, int cursor) {
-
-		// frequencyTable.entrySet().stream().forEach(a -> {
-		// if (!a.getValue().isEmpty()) {
-		// System.out.println(a.getKey() + " " + a.getValue());
-		// }
-		// });
-
-		List<Entry<Integer, HashSet<Object>>> collect = frequencyTable.entrySet().stream().collect(Collectors.toList());
-
-		Collections.reverse(collect);
-
-		collect.subList(100, 816).forEach(a -> {
-			if (!a.getValue().isEmpty()) {
-				System.out.println(a.getKey() + " " + a.getValue());
-			}
-		});
 	}
 
 }
