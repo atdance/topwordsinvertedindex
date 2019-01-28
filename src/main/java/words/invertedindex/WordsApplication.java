@@ -43,7 +43,11 @@ public class WordsApplication {
 
 		int cursor = index.getMaxIndexUsed();
 
-		Top.getTopTen(frequencyTable, cursor);
+		List<HashSet<Word>> firstTen = Top.getTopTen(frequencyTable, cursor);
+
+		for (HashSet<Word> elements : firstTen) {
+			System.out.println(elements);
+		}
 	}
 
 	/**
