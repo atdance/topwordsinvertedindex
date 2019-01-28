@@ -1,12 +1,7 @@
 package words.invertedindex;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.atomic.LongAdder;
-import java.util.stream.Collectors;
 
 public class WordsApplication {
 
@@ -39,38 +34,12 @@ public class WordsApplication {
 
 		InvertedIndex<Word> index = new InvertedIndex<>();
 
-		Map<Integer, HashSet<Word>> frequencyTable = index.getWords(words);
+		Words<Word> frequencyTable = index.getWords(words);
 
 		int cursor = index.getMaxIndexUsed();
 
-		Map<Integer, HashSet<Word>> firstTen = Top.getTopTen(frequencyTable, cursor);
-		firstTen.entrySet().forEach(a -> System.out.println(a.getKey() + "(" + a.getValue().toString() + ")"));
+		new PrintableInvertedIndex(frequencyTable, cursor).print();
 
-		// List<String> firstTen = Top.getTopTen(frequencyTable, cursor);
-		//
-		// for (String element : firstTen) {
-		// System.out.println(element);
-		// }
-	}
-
-	/**
-	 * Goes through all the HashSet values of the frequencyTable and counts existing
-	 * elements
-	 * 
-	 * @return size as integer
-	 */
-	public static int getSize(Map<Integer, HashSet<Word>> frequencyTable) {
-		List<Entry<Integer, HashSet<Word>>> collect = frequencyTable.entrySet().stream().collect(Collectors.toList());
-
-		LongAdder size = new LongAdder();
-
-		collect.forEach(a -> {
-			if (!a.getValue().isEmpty()) {
-				size.add(a.getValue().size());
-			}
-		});
-
-		return size.intValue();
 	}
 
 }

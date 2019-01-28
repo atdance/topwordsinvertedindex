@@ -1,6 +1,5 @@
 package words.invertedindex;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,6 +9,7 @@ import java.util.TreeMap;
  */
 public class Top {
 	/**
+	 * @param <V>
 	 * @param frequencyTable
 	 *            athe data to be filtered
 	 * @param the
@@ -18,9 +18,9 @@ public class Top {
 	 * @see words.invertedindex.InvertedIndex
 	 * 
 	 */
-	final static public Map<Integer, HashSet<Word>> getTopTen(Map<Integer, HashSet<Word>> frequencyTable, int cursor) {
+	final static public <V> Map<Integer, HashSet<V>> getTopTen(Words<V> frequencyTable, int cursor) {
 
-		Map<Integer, HashSet<Word>> res = new HashMap<>();
+		Words<V> res = new Words<>();
 
 		int counter = 0;
 
@@ -30,13 +30,17 @@ public class Top {
 			if (counter == 10) {
 				break;
 			}
-			HashSet<Word> words = frequencyTable.get(i);
+			HashSet<V> words = frequencyTable.get(i);
 			if (words.size() > 0) {
 				counter++;
 				res.put(new Integer(i), words);
 			}
 		}
 
-		return new TreeMap<>(res).descendingMap();
+		Map<Integer, HashSet<V>> all = res.getAll();
+
+		TreeMap<Integer, HashSet<V>> treeMap = new TreeMap<>(all);
+
+		return treeMap.descendingMap();
 	}
 }

@@ -3,10 +3,8 @@
  */
 package words.invertedindex;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Uses the concept of the inverted index to track and rank entries .
@@ -26,7 +24,7 @@ public class InvertedIndex<V> {
 	 */
 	static final Integer ZERO = new Integer(0);
 
-	final public Map<Integer, HashSet<V>> frequencyTable = new HashMap<>();
+	final private Words<V> frequencyTable = new Words<>();
 
 	/**
 	 * the size used to construct each HashSet used as a value of the entries of the
@@ -40,10 +38,9 @@ public class InvertedIndex<V> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	final public Map<Integer, HashSet<V>> getWords(List<Word> words) {
-		for (Word word : words) {
-			handleValue((V) word);
+	final public Words<V> getWords(List<V> words) {
+		for (V word : words) {
+			handleValue(word);
 		}
 		return frequencyTable;
 	}
