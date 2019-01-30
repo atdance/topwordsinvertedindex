@@ -1,5 +1,6 @@
 package words.invertedindex;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -34,6 +35,27 @@ public class TopTest {
 		for (Entry<Integer, HashSet<Word>> found : entries) {
 			assertTrue(expectedTenWords.containsAll(found.getValue()));
 		}
+	}
+
+	@Test
+	public void shouldFailWihEntriesNotInExpectedSet() {
+
+		Words<Word> frequencyTable = new InvertedIndex<Word>().getWords(moreThanTenWordswords);
+
+		Map<Integer, HashSet<Word>> gotFirstTen = Top.getTopTen(frequencyTable, 10);
+
+		addEntityForVerification(gotFirstTen);
+
+		HashSet<Word> set = gotFirstTen.get(new Integer(515));
+
+		assertFalse(expectedTenWords.contains(set));
+
+	}
+
+	private void addEntityForVerification(Map<Integer, HashSet<Word>> gotFirstTen) {
+		HashSet<Word> set = new HashSet<>();
+		set.add(new Word("testword"));
+		gotFirstTen.put(new Integer(515), set);
 	}
 
 	@Before
