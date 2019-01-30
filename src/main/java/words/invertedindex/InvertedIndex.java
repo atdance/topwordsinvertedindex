@@ -22,7 +22,7 @@ public class InvertedIndex<V> {
 	 * the very first time
 	 * 
 	 */
-	static final Integer ZERO = new Integer(0);
+	static final Integer ZERO = Integer.valueOf(0);
 
 	final private Words<V> frequencyTable = new Words<>();
 
@@ -34,7 +34,7 @@ public class InvertedIndex<V> {
 
 	InvertedIndex() {
 		for (int i = 0; i < maxSize; i++) {
-			frequencyTable.put(new Integer(i), new HashSet<V>(maxSize));
+			frequencyTable.put(Integer.valueOf(i), new HashSet<V>(maxSize));
 		}
 	}
 
