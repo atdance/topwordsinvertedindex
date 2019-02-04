@@ -57,7 +57,7 @@ public class Word implements Comparable<Word> {
 
 	@Override
 	public int compareTo(Word arg0) {
-		return this.word.compareToIgnoreCase(arg0.word);
+		return this.word.compareTo(arg0.word);
 	}
 
 }
