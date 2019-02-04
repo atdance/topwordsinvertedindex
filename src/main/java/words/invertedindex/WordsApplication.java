@@ -32,14 +32,13 @@ public class WordsApplication {
 			return;
 		}
 
-		InvertedIndex<Word> index = new InvertedIndex<>();
+		InvertedIndex<Word> index = new InvertedIndex<>(words);
 
-		Words<Word> frequencyTable = index.getWords(words);
+		Words<Word> frequencyTable = index.getWords();
 
 		int cursor = index.getMaxIndexUsed();
 
 		new PrintableInvertedIndex(frequencyTable, cursor).print();
-
 	}
 
 }
