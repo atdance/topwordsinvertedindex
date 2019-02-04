@@ -9,6 +9,8 @@ import java.util.TreeMap;
  */
 public class Top {
 	/**
+	 * Uses a TreeMap for sorting.
+	 * 
 	 * @param <V>
 	 * @param frequencyTable
 	 *            athe data to be filtered
@@ -16,6 +18,7 @@ public class Top {
 	 *            highest index used for keys in frequencyTable
 	 * 
 	 * @see words.invertedindex.InvertedIndex
+	 * @see java.util.TreeMap
 	 * 
 	 */
 	final static public <V> Map<Integer, HashSet<V>> getTopTen(Words<V> frequencyTable, int cursor) {
@@ -31,7 +34,7 @@ public class Top {
 				break;
 			}
 			HashSet<V> words = frequencyTable.get(i);
-			if (words.size() > 0) {
+			if (null != words && words.size() > 0) {
 				counter++;
 				res.put(Integer.valueOf(i), words);
 			}
